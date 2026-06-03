@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>1070 Agenda - Anderlecht</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .font-display {
+            font-family: "Archivo Black", sans-serif;
+        }
+
+        .font-body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .font-mono {
+            font-family: "Space Mono", monospace;
+        }
+
+        .city-grid {
+            background-image:
+                    linear-gradient(rgba(30, 42, 68, 0.055) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30, 42, 68, 0.055) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#F7F1E8] text-[#1E2A44] font-body city-grid">
+
+<!-- NAVIGATIE -->
+<nav class="border-b-4 border-[#E3B341] bg-[#1E2A44] text-white shadow-lg">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+
+        <!-- LOGO EN LINK NAAR DE STARTPAGINA -->
+        <a th:href="@{/}"
+           class="flex items-center gap-3">
+
+            <span class="flex h-11 w-11 items-center justify-center bg-[#E3B341] font-display text-sm text-[#1E2A44]">
+                1070
+            </span>
+
+            <span>
+                <span class="block font-display text-lg uppercase tracking-wide">
+                    Anderlecht
+                </span>
+
+                <span class="block font-mono text-[0.58rem] uppercase tracking-[0.28em] text-[#EBD8B0]">
+                    Lokale agenda
+                </span>
+            </span>
+        </a>
+            <!-- MENU -->
+            <div class="flex flex-wrap items-center gap-5 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em]">
+
+                <a th:href="@{/}"
+                   class="border-b-2 border-[#E3B341] pb-1 text-[#E3B341]">
+                    Agenda
+                </a>
+
+                <a th:href="@{/new}"
+                   class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Nieuw evenement
+                </a>
+
+                <a th:href="@{/about}"
+                   class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Over ons
+                </a>
+
+                <a th:href="@{/contact}"
+                   class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- INTRODUCTIESECTIE -->
+<header class="relative overflow-hidden bg-[#1E2A44] text-white">
+
+    <div class="absolute -right-12 -top-20 select-none font-display text-[13rem] leading-none text-white/[0.035] sm:right-4 sm:text-[19rem]">
+        1070
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-14 sm:px-7 sm:py-16">
+
+        <p class="mb-5 inline-flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-[#E3B341]">
+            <span class="h-2 w-2 bg-[#E3B341]"></span>
+            Agenda voor de buurt
+        </p>
+
+        <h1 class="max-w-3xl font-display text-5xl uppercase leading-[0.98] tracking-tight sm:text-7xl">
+            Wat leeft er
+            <span class="block text-[#E3B341]">
+                in Anderlecht?
+            </span>
+        </h1>
+
+        <p class="mt-7 max-w-xl text-base leading-7 text-[#D7DFEF]">
+            Ontdek de nieuwste activiteiten en initiatieven van lokale organisaties.
+        </p>
+    </div>
+</header>
+
+<!-- HOOFDINHOUD -->
+<main class="mx-auto w-full max-w-6xl flex-grow px-5 py-14 sm:px-7 sm:py-16">
+
+    <!-- TITEL BOVEN DE TABEL -->
+    <div class="mb-8 flex flex-col gap-5 border-b-2 border-[#1E2A44] pb-6 sm:flex-row sm:items-end sm:justify-between">
+
+        <div>
+            <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[#D5573B]">
+                Laatste updates
+            </p>
+
+            <h2 class="mt-2 font-display text-3xl uppercase text-[#1E2A44] sm:text-4xl">
+                Evenementen
+            </h2>
+        </div>
+
+        <a th:href="@{/new}"
+           class="inline-flex w-fit items-center gap-3 bg-[#D5573B] px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-white shadow-[4px_4px_0_#1E2A44] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#1E2A44]">
+
+            <span class="text-lg leading-none">
+                +
+            </span>
+
+            Evenement toevoegen
+        </a>
+    </div>
+
+    <!-- TABEL MET DE TIEN LAATSTE EVENEMENTEN -->
+    <section class="overflow-hidden border-2 border-[#1E2A44] bg-[#FFFCF6] shadow-[7px_7px_0_#1E2A44]">
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full border-collapse">
+
+                <!-- KOLOMTITELS -->
+                <thead>
+                <tr class="border-b-2 border-[#1E2A44] bg-[#E3B341] text-left">
+                    <th class="px-5 py-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                        Titel
+                    </th>
+
+                    <th class="px-5 py-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                        Organisatie
+                    </th>
+
+                    <th class="px-5 py-4 text-center font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                        Actie
+                    </th>
+                </tr>
+                </thead>
+
+                <!-- EVENEMENTEN -->
+                <tbody class="divide-y-2 divide-[#1E2A44]">
+
+                <tr th:each="event : ${events}"
+                    class="group transition duration-300 hover:bg-[#FFF4D6]">
+
+                    <td class="px-5 py-5">
+                        <span class="font-display text-base uppercase text-[#1E2A44] transition duration-300 group-hover:text-[#D5573B]"
+                              th:text="${event.titel}">
+                            Titel van het evenement
+                        </span>
+                    </td>
+
+                    <td class="px-5 py-5 text-sm font-medium text-[#63708A]"
+                        th:text="${event.organisatie}">
+                        Naam van de organisatie
+                    </td>
+
+                    <td class="px-5 py-5 text-center">
+                        <a th:href="@{/details/{id}(id=${event.id})}"
+                           class="inline-flex items-center gap-2 border-2 border-[#1E2A44] bg-[#FFFCF6] px-4 py-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.13em] text-[#1E2A44] transition duration-200 hover:bg-[#1E2A44] hover:text-white">
+
+                            Details
+
+                            <span>
+                                →
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- MELDING WANNEER ER GEEN EVENEMENTEN ZIJN -->
+                <tr th:if="${#lists.isEmpty(events)}">
+                    <td colspan="3"
+                        class="px-6 py-14 text-center">
+
+                        <p class="font-display text-xl uppercase text-[#1E2A44]">
+                            Nog geen evenementen
+                        </p>
+
+                        <p class="mt-3 text-sm text-[#63708A]">
+                            Voeg het eerste evenement toe aan de lokale agenda.
+                        </p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- KNOP ONDER DE TABEL -->
+    <div class="mt-9 flex justify-center">
+        <a th:href="@{/new}"
+           class="inline-flex items-center gap-3 bg-[#D5573B] px-6 py-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white shadow-[4px_4px_0_#1E2A44] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#1E2A44]">
+
+            <span class="text-lg leading-none">
+                +
+            </span>
+
+            Nieuw evenement toevoegen
+        </a>
+    </div>
+</main>
+
+<!-- VOETTEKST -->
+<footer class="mt-10 border-t-4 border-[#E3B341] bg-[#1E2A44] px-5 py-7 text-center text-white">
+
+    <p class="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-[#AFC0D8]">
+        &copy; 2026 NGO Anderlecht. Alle rechten voorbehouden.
+    </p>
+</footer>
+
+</body>
+</html>
+
+
+

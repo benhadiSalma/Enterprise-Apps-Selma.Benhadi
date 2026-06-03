@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nieuw evenement - 1070 Agenda</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .font-display {
+            font-family: "Archivo Black", sans-serif;
+        }
+
+        .font-body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .font-mono {
+            font-family: "Space Mono", monospace;
+        }
+
+        .city-grid {
+            background-image:
+                    linear-gradient(rgba(30, 42, 68, 0.055) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30, 42, 68, 0.055) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#F7F1E8] text-[#1E2A44] font-body city-grid">
+
+<!-- NAVIGATIE -->
+<nav class="border-b-4 border-[#E3B341] bg-[#1E2A44] text-white shadow-lg">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+
+        <!-- LOGO EN LINK NAAR DE STARTPAGINA -->
+        <a th:href="@{/}"
+           class="flex items-center gap-3">
+
+            <span class="flex h-11 w-11 items-center justify-center bg-[#E3B341] font-display text-sm text-[#1E2A44]">
+                1070
+            </span>
+
+            <span>
+                <span class="block font-display text-lg uppercase tracking-wide">
+                    Anderlecht
+                </span>
+
+                <span class="block font-mono text-[0.58rem] uppercase tracking-[0.28em] text-[#EBD8B0]">
+                    Lokale agenda
+                </span>
+            </span>
+        </a>
+
+        <!-- MENU -->
+        <div class="flex flex-wrap items-center gap-5 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em]">
+
+            <a th:href="@{/}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Agenda
+            </a>
+
+            <a th:href="@{/new}"
+               class="border-b-2 border-[#E3B341] pb-1 text-[#E3B341]">
+                Nieuw evenement
+            </a>
+
+            <a th:href="@{/about}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Over ons
+            </a>
+
+            <a th:href="@{/contact}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Contact
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- INTRODUCTIESECTIE -->
+<header class="relative overflow-hidden bg-[#1E2A44] text-white">
+
+    <div class="absolute -right-12 -top-16 select-none font-display text-[12rem] leading-none text-white/[0.035] sm:right-4 sm:text-[17rem]">
+        1070
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-14 sm:px-7 sm:py-16">
+
+        <p class="mb-5 flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-[#E3B341]">
+            <span class="h-2 w-2 bg-[#E3B341]"></span>
+            Nieuwe lokale activiteit
+        </p>
+
+        <h1 class="max-w-3xl font-display text-4xl uppercase leading-[1.02] tracking-tight sm:text-6xl">
+            Voeg iets toe
+            <span class="block text-[#E3B341]">
+                aan de buurt
+            </span>
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-7 text-[#D7DFEF]">
+            Vul alle gegevens in om een nieuw evenement aan de lokale agenda toe te voegen.
+        </p>
+    </div>
+</header>
+
+<!-- HOOFDINHOUD -->
+<main class="mx-auto w-full max-w-4xl flex-grow px-5 py-12 sm:px-7 sm:py-16">
+
+    <!-- FORMULIER -->
+    <section class="border-2 border-[#1E2A44] bg-[#FFFCF6] shadow-[7px_7px_0_#1E2A44]">
+
+        <div class="flex items-center justify-between border-b-2 border-[#1E2A44] bg-[#E3B341] px-5 py-4 sm:px-7">
+
+            <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                Evenement registreren
+            </p>
+
+            <span class="font-display text-xl text-[#1E2A44]">
+                +
+            </span>
+        </div>
+
+        <form th:action="@{/new}"
+              th:object="${eventForm}"
+              method="post"
+              novalidate
+              class="space-y-7 px-5 py-7 sm:px-7 sm:py-9">
+
+            <!-- ALGEMENE MELDING BIJ FOUTEN -->
+            <div th:if="${#fields.hasAnyErrors()}"
+                 class="border-2 border-[#D5573B] bg-[#FFF0EB] px-4 py-3 text-sm font-bold text-[#D5573B]">
+
+                Controleer de gemarkeerde velden en probeer opnieuw.
+            </div>
+
+            <!-- TITEL VAN HET EVENEMENT -->
+            <div>
+                <label for="titel"
+                       class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                    Titel van het evenement
+                </label>
+
+                <input id="titel"
+                       type="text"
+                       th:field="*{titel}"
+                       th:errorclass="border-[#D5573B] bg-[#FFF0EB]"
+                       placeholder="Bijvoorbeeld: Buurtfeest in het park"
+                       class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                <p th:if="${#fields.hasErrors('titel')}"
+                   th:errors="*{titel}"
+                   class="mt-2 text-sm font-bold text-[#D5573B]">
+                    Foutmelding
+                </p>
+            </div>
+
+            <!-- OMSCHRIJVING VAN HET EVENEMENT -->
+            <div>
+                <label for="omschrijving"
+                       class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                    Omschrijving
+                </label>
+
+                <textarea id="omschrijving"
+                          th:field="*{omschrijving}"
+                          th:errorclass="border-[#D5573B] bg-[#FFF0EB]"
+                          rows="4"
+                          placeholder="Beschrijf kort wat er tijdens het evenement gebeurt"
+                          class="w-full resize-none border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200"></textarea>
+
+                <p th:if="${#fields.hasErrors('omschrijving')}"
+                   th:errors="*{omschrijving}"
+                   class="mt-2 text-sm font-bold text-[#D5573B]">
+                    Foutmelding
+                </p>
+            </div>
+
+            <!-- DATUM EN TIJD -->
+            <div>
+                <label for="tijdstip"
+                       class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                    Datum en tijd
+                </label>
+
+                <input id="tijdstip"
+                       type="datetime-local"
+                       th:field="*{tijdstip}"
+                       th:errorclass="border-[#D5573B] bg-[#FFF0EB]"
+                       class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                <p th:if="${#fields.hasErrors('tijdstip')}"
+                   th:errors="*{tijdstip}"
+                   class="mt-2 text-sm font-bold text-[#D5573B]">
+                    Foutmelding
+                </p>
+            </div>
+
+            <!-- NAAM VAN DE ORGANISATIE -->
+            <div>
+                <label for="organisatie"
+                       class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                    Organisatie
+                </label>
+
+                <input id="organisatie"
+                       type="text"
+                       th:field="*{organisatie}"
+                       th:errorclass="border-[#D5573B] bg-[#FFF0EB]"
+                       placeholder="Bijvoorbeeld: NGO Anderlecht"
+                       class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                <p th:if="${#fields.hasErrors('organisatie')}"
+                   th:errors="*{organisatie}"
+                   class="mt-2 text-sm font-bold text-[#D5573B]">
+                    Foutmelding
+                </p>
+            </div>
+
+            <!-- CONTACTE-MAILADRES -->
+            <div>
+                <label for="contactEmail"
+                       class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                    Contacte-mailadres
+                </label>
+
+                <input id="contactEmail"
+                       type="email"
+                       th:field="*{contactEmail}"
+                       th:errorclass="border-[#D5573B] bg-[#FFF0EB]"
+                       placeholder="Bijvoorbeeld: info@organisatie.be"
+                       class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                <p th:if="${#fields.hasErrors('contactEmail')}"
+                   th:errors="*{contactEmail}"
+                   class="mt-2 text-sm font-bold text-[#D5573B]">
+                    Foutmelding
+                </p>
+            </div>
+
+            <!-- LOCATIE VAN HET EVENEMENT -->
+            <div>
+                <label for="locatieId"
+                       class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                    Locatie
+                </label>
+
+                <select id="locatieId"
+                        th:field="*{locatieId}"
+                        th:errorclass="border-[#D5573B] bg-[#FFF0EB]"
+                        class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                    <option value="">
+                        Kies een locatie
+                    </option>
+
+                    <option th:each="location : ${locations}"
+                            th:value="${location.id}"
+                            th:text="${location.naam}">
+                        Naam van de locatie
+                    </option>
+                </select>
+
+                <p th:if="${#fields.hasErrors('locatieId')}"
+                   th:errors="*{locatieId}"
+                   class="mt-2 text-sm font-bold text-[#D5573B]">
+                    Foutmelding
+                </p>
+            </div>
+
+            <!-- ACTIEKNOPPEN -->
+            <div class="flex flex-col-reverse gap-4 border-t-2 border-dashed border-[#C9C2B7] pt-7 sm:flex-row sm:items-center sm:justify-between">
+
+                <a th:href="@{/}"
+                   class="inline-flex items-center justify-center gap-2 border-2 border-[#1E2A44] bg-[#FFFCF6] px-5 py-3 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em] text-[#1E2A44] transition duration-200 hover:bg-[#1E2A44] hover:text-white">
+
+                    <span>
+                        ←
+                    </span>
+
+                    Annuleren
+                </a>
+
+                <button type="submit"
+                        class="inline-flex items-center justify-center gap-3 bg-[#D5573B] px-6 py-3 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em] text-white shadow-[4px_4px_0_#1E2A44] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#1E2A44]">
+
+                    Evenement opslaan
+
+                    <span>
+                        →
+                    </span>
+                </button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<!-- VOETTEKST -->
+<footer class="mt-10 border-t-4 border-[#E3B341] bg-[#1E2A44] px-5 py-7 text-center text-white">
+
+    <p class="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-[#AFC0D8]">
+        &copy; 2026 NGO Anderlecht. Alle rechten voorbehouden.
+    </p>
+</footer>
+
+</body>
+</html>
+
+

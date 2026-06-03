@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact - 1070 Agenda</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .font-display {
+            font-family: "Archivo Black", sans-serif;
+        }
+
+        .font-body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .font-mono {
+            font-family: "Space Mono", monospace;
+        }
+
+        .city-grid {
+            background-image:
+                    linear-gradient(rgba(30, 42, 68, 0.055) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30, 42, 68, 0.055) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#F7F1E8] text-[#1E2A44] font-body city-grid">
+
+<!-- NAVIGATIE -->
+<nav class="border-b-4 border-[#E3B341] bg-[#1E2A44] text-white shadow-lg">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+
+        <!-- LOGO EN LINK NAAR DE STARTPAGINA -->
+        <a th:href="@{/}"
+           class="flex items-center gap-3">
+
+            <span class="flex h-11 w-11 items-center justify-center bg-[#E3B341] font-display text-sm text-[#1E2A44]">
+                1070
+            </span>
+
+            <span>
+                <span class="block font-display text-lg uppercase tracking-wide">
+                    Anderlecht
+                </span>
+
+                <span class="block font-mono text-[0.58rem] uppercase tracking-[0.28em] text-[#EBD8B0]">
+                    Lokale agenda
+                </span>
+            </span>
+        </a>
+
+        <!-- MENU -->
+        <div class="flex flex-wrap items-center gap-5 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em]">
+
+            <a th:href="@{/}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Agenda
+            </a>
+
+            <a th:href="@{/new}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Nieuw evenement
+            </a>
+
+            <a th:href="@{/about}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Over ons
+            </a>
+
+            <a th:href="@{/contact}"
+               class="border-b-2 border-[#E3B341] pb-1 text-[#E3B341]">
+                Contact
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- INTRODUCTIESECTIE -->
+<header class="relative overflow-hidden bg-[#1E2A44] text-white">
+
+    <div class="absolute -right-12 -top-20 select-none font-display text-[13rem] leading-none text-white/[0.035] sm:right-4 sm:text-[19rem]">
+        1070
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-14 sm:px-7 sm:py-16">
+
+        <p class="mb-5 inline-flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-[#E3B341]">
+            <span class="h-2 w-2 bg-[#E3B341]"></span>
+            Neem contact op
+        </p>
+
+        <h1 class="max-w-3xl font-display text-5xl uppercase leading-[0.98] tracking-tight sm:text-7xl">
+            Stuur ons
+            <span class="block text-[#E3B341]">
+                een bericht
+            </span>
+        </h1>
+
+        <p class="mt-7 max-w-xl text-base leading-7 text-[#D7DFEF]">
+            Heb je een vraag of wil je meer informatie? Vul het formulier in en onze organisatie neemt contact met je op.
+        </p>
+    </div>
+</header>
+
+<!-- HOOFDINHOUD -->
+<main class="mx-auto w-full max-w-6xl flex-grow px-5 py-14 sm:px-7 sm:py-16">
+
+    <div class="grid gap-7 lg:grid-cols-[1fr_310px]">
+
+        <!-- CONTACTFORMULIER -->
+        <section class="border-2 border-[#1E2A44] bg-[#FFFCF6] shadow-[7px_7px_0_#1E2A44]">
+
+            <div class="border-b-2 border-[#1E2A44] bg-[#E3B341] px-6 py-4">
+
+                <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                    Contactformulier
+                </p>
+            </div>
+
+            <form th:action="@{/contact}"
+                  th:object="${contactForm}"
+                  method="post"
+                  class="space-y-6 px-6 py-7 sm:px-8 sm:py-9">
+
+                <!-- BEVESTIGING NA VERZENDING -->
+                <div th:if="${successMessage}"
+                     class="border-2 border-[#1E2A44] bg-[#E3B341] px-4 py-3 text-sm font-bold text-[#1E2A44]"
+                     th:text="${successMessage}">
+                    Je bericht is succesvol verzonden.
+                </div>
+
+                <!-- FOUT BIJ VERZENDING -->
+                <div th:if="${sendError}"
+                     class="border-2 border-[#D5573B] bg-[#FFF0EB] px-4 py-3 text-sm font-bold text-[#D5573B]"
+                     th:text="${sendError}">
+                    Je bericht kon niet worden verzonden.
+                </div>
+
+                <!-- NAAM -->
+                <div>
+                    <label for="naam"
+                           class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Naam
+                    </label>
+
+                    <input id="naam"
+                           type="text"
+                           th:field="*{naam}"
+                           placeholder="Jouw volledige naam"
+                           class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                    <p th:if="${#fields.hasErrors('naam')}"
+                       th:errors="*{naam}"
+                       class="mt-2 text-sm font-bold text-[#D5573B]">
+                        Foutmelding
+                    </p>
+                </div>
+
+                <!-- E-MAILADRES -->
+                <div>
+                    <label for="email"
+                           class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        E-mailadres
+                    </label>
+
+                    <input id="email"
+                           type="email"
+                           th:field="*{email}"
+                           placeholder="naam@voorbeeld.be"
+                           class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                    <p th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"
+                       class="mt-2 text-sm font-bold text-[#D5573B]">
+                        Foutmelding
+                    </p>
+                </div>
+
+                <!-- ONDERWERP -->
+                <div>
+                    <label for="onderwerp"
+                           class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Onderwerp
+                    </label>
+
+                    <input id="onderwerp"
+                           type="text"
+                           th:field="*{onderwerp}"
+                           placeholder="Waarover gaat jouw vraag?"
+                           class="w-full border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200">
+
+                    <p th:if="${#fields.hasErrors('onderwerp')}"
+                       th:errors="*{onderwerp}"
+                       class="mt-2 text-sm font-bold text-[#D5573B]">
+                        Foutmelding
+                    </p>
+                </div>
+
+                <!-- BERICHT -->
+                <div>
+                    <label for="bericht"
+                           class="mb-3 block font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Bericht
+                    </label>
+
+                    <textarea id="bericht"
+                              th:field="*{bericht}"
+                              rows="6"
+                              placeholder="Schrijf hier jouw bericht"
+                              class="w-full resize-none border-2 border-[#1E2A44] bg-white px-4 py-4 text-sm font-medium text-[#1E2A44] outline-none placeholder:text-[#9AA3B3] focus:bg-[#FFF7E5] focus:shadow-[4px_4px_0_#E3B341] transition duration-200"></textarea>
+
+                    <p th:if="${#fields.hasErrors('bericht')}"
+                       th:errors="*{bericht}"
+                       class="mt-2 text-sm font-bold text-[#D5573B]">
+                        Foutmelding
+                    </p>
+                </div>
+
+                <!-- VERZENDKNOP -->
+                <div class="border-t-2 border-dashed border-[#C9C2B7] pt-6">
+
+                    <button type="submit"
+                            class="inline-flex items-center gap-3 bg-[#D5573B] px-6 py-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white shadow-[4px_4px_0_#1E2A44] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#1E2A44]">
+
+                        Bericht versturen
+
+                        <span>
+                            →
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- CONTACTGEGEVENS -->
+        <aside class="h-fit border-2 border-[#1E2A44] bg-[#1E2A44] text-white shadow-[7px_7px_0_#E3B341]">
+
+            <div class="border-b-2 border-[#E3B341] px-5 py-4">
+
+                <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-[#E3B341]">
+                    Contactgegevens
+                </p>
+            </div>
+
+            <div class="space-y-6 px-5 py-6">
+
+                <div class="border-l-4 border-[#D5573B] pl-4">
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        Adres
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        Nijverheidskaai 170<br>
+                        1070 Anderlecht
+                    </p>
+                </div>
+
+                <div class="border-l-4 border-[#D5573B] pl-4">
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        Telefoon
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        +32 2 123 45 67
+                    </p>
+                </div>
+
+                <div class="border-l-4 border-[#D5573B] pl-4">
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        E-mailadres
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        info@ngo-anderlecht.be
+                    </p>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- VOETTEKST -->
+<footer class="mt-10 border-t-4 border-[#E3B341] bg-[#1E2A44] px-5 py-7 text-center text-white">
+
+    <p class="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-[#AFC0D8]">
+        &copy; 2026 NGO Anderlecht. Alle rechten voorbehouden.
+    </p>
+</footer>
+
+</body>
+</html>
+

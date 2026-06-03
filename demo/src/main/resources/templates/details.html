@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Evenement details - 1070 Agenda</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .font-display {
+            font-family: "Archivo Black", sans-serif;
+        }
+
+        .font-body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .font-mono {
+            font-family: "Space Mono", monospace;
+        }
+
+        .city-grid {
+            background-image:
+                    linear-gradient(rgba(30, 42, 68, 0.055) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30, 42, 68, 0.055) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#F7F1E8] text-[#1E2A44] font-body city-grid">
+
+<!-- NAVIGATIE -->
+<nav class="border-b-4 border-[#E3B341] bg-[#1E2A44] text-white">
+    <div class="mx-auto max-w-6xl px-5 py-5 sm:px-7">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+            <a th:href="@{/}"
+               class="flex items-center gap-3">
+
+                <span class="flex h-11 w-11 items-center justify-center bg-[#E3B341] font-display text-sm text-[#1E2A44]">
+                    1070
+                </span>
+
+                <span>
+                    <span class="block font-display text-lg uppercase tracking-wide">
+                        Anderlecht
+                    </span>
+
+                    <span class="block font-mono text-[0.58rem] uppercase tracking-[0.28em] text-[#EBD8B0]">
+                        Lokale agenda
+                    </span>
+                </span>
+            </a>
+
+            <div class="flex items-center gap-5 font-mono text-[0.66rem] font-bold uppercase tracking-[0.16em]">
+                <a th:href="@{/}"
+                   class="border-b-2 border-transparent pb-1 text-white transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Agenda
+                </a>
+
+                <a th:href="@{/new}"
+                   class="border-b-2 border-transparent pb-1 text-white transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Nieuw evenement
+                </a>
+            </div>
+            <!-- MENU -->
+            <div class="flex flex-wrap items-center gap-5 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em]">
+
+                <a th:href="@{/}"
+                   class="border-b-2 border-[#E3B341] pb-1 text-[#E3B341]">
+                    Agenda
+                </a>
+
+                <a th:href="@{/new}"
+                   class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Nieuw evenement
+                </a>
+
+                <a th:href="@{/about}"
+                   class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Over ons
+                </a>
+
+                <a th:href="@{/contact}"
+                   class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- INTRODUCTIESECTIE -->
+<header class="relative overflow-hidden bg-[#1E2A44] text-white">
+    <div class="absolute -right-12 -top-16 select-none font-display text-[12rem] leading-none text-white/[0.035] sm:right-4 sm:text-[17rem]">
+        1070
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-14 sm:px-7 sm:py-16">
+
+        <a th:href="@{/}"
+           class="mb-7 inline-flex items-center gap-3 font-mono text-[0.64rem] font-bold uppercase tracking-[0.16em] text-[#E3B341] transition duration-300 hover:text-white">
+            <span class="text-base">←</span>
+            Terug naar de agenda
+        </a>
+
+        <p class="mb-5 flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-[#E3B341]">
+            <span class="h-2 w-2 bg-[#E3B341]"></span>
+            Lokale activiteit
+        </p>
+
+        <h1 class="max-w-4xl font-display text-4xl uppercase leading-[1.02] tracking-tight sm:text-6xl"
+            th:text="${event.titel}">
+            Titel van het evenement
+        </h1>
+
+        <p class="mt-6 flex items-center gap-3 text-base text-[#D7DFEF]">
+            <span class="h-3 w-3 bg-[#D5573B]"></span>
+
+            <span th:text="${event.organisatie}">
+                Naam van de organisatie
+            </span>
+        </p>
+    </div>
+</header>
+
+<!-- HOOFDINHOUD -->
+<main class="mx-auto w-full max-w-6xl flex-grow px-5 py-12 sm:px-7 sm:py-16">
+
+    <div class="grid gap-7 lg:grid-cols-[1fr_300px]">
+
+        <!-- INFORMATIE OVER HET EVENEMENT -->
+        <section class="border-2 border-[#1E2A44] bg-[#FFFCF6] shadow-[7px_7px_0_#1E2A44]">
+
+            <div class="flex items-center justify-between border-b-2 border-[#1E2A44] bg-[#E3B341] px-5 py-4 sm:px-7">
+
+                <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                    Informatie over het evenement
+                </p>
+
+                <span class="font-display text-xl text-[#1E2A44]">
+                    1070
+                </span>
+            </div>
+
+            <div class="space-y-8 px-5 py-7 sm:px-7 sm:py-9">
+
+                <!-- OMSCHRIJVING -->
+                <div>
+                    <p class="mb-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Omschrijving
+                    </p>
+
+                    <p class="leading-7 text-[#4E5B73]"
+                       th:text="${event.omschrijving}">
+                        Omschrijving van het evenement.
+                    </p>
+                </div>
+
+                <!-- DATUM EN TIJD -->
+                <div class="border-t-2 border-dashed border-[#C9C2B7] pt-6">
+                    <p class="mb-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Datum en tijd
+                    </p>
+
+                    <p class="font-medium text-[#1E2A44]"
+                       th:text="${event.tijdstip}">
+                        Datum en tijd
+                    </p>
+                </div>
+
+                <!-- ORGANISATIE -->
+                <div class="border-t-2 border-dashed border-[#C9C2B7] pt-6">
+                    <p class="mb-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Organisatie
+                    </p>
+
+                    <p class="font-medium text-[#1E2A44]"
+                       th:text="${event.organisatie}">
+                        Organisatie
+                    </p>
+                </div>
+
+                <!-- CONTACTE-MAILADRES -->
+                <div class="border-t-2 border-dashed border-[#C9C2B7] pt-6">
+                    <p class="mb-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#D5573B]">
+                        Contacte-mailadres
+                    </p>
+
+                    <a th:href="'mailto:' + ${event.contactEmail}"
+                       th:text="${event.contactEmail}"
+                       class="font-medium text-[#1E2A44] underline decoration-[#E3B341] decoration-2 underline-offset-4 transition duration-300 hover:text-[#D5573B]">
+                        info@organisatie.be
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATIE -->
+        <aside class="h-fit border-2 border-[#1E2A44] bg-[#1E2A44] text-white shadow-[7px_7px_0_#E3B341]">
+
+            <div class="border-b-2 border-[#E3B341] px-5 py-4">
+                <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-[#E3B341]">
+                    Locatie
+                </p>
+            </div>
+
+            <div class="px-5 py-6">
+
+                <p class="font-display text-xl uppercase leading-tight"
+                   th:text="${event.locatie.naam}">
+                    Naam van de locatie
+                </p>
+
+                <div class="mt-6 border-l-4 border-[#D5573B] pl-4">
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        Adres
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]"
+                       th:text="${event.locatie.adres}">
+                        Adres van de locatie
+                    </p>
+                </div>
+
+                <div class="mt-6 border-l-4 border-[#D5573B] pl-4">
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        Capaciteit
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        <span th:text="${event.locatie.capaciteit}">
+                            0
+                        </span>
+                        personen
+                    </p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- TERUGKNOP -->
+    <div class="mt-10">
+        <a th:href="@{/}"
+           class="inline-flex items-center gap-3 border-2 border-[#1E2A44] bg-[#FFFCF6] px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-[#1E2A44] transition duration-200 hover:bg-[#1E2A44] hover:text-white">
+            <span>←</span>
+            Terug naar de agenda
+        </a>
+    </div>
+</main>
+
+<!-- VOETTEKST -->
+<footer class="mt-10 border-t-4 border-[#E3B341] bg-[#1E2A44] text-white">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+
+        <div>
+            <p class="font-display text-sm uppercase tracking-wide">
+                1070 Anderlecht
+            </p>
+
+            <p class="mt-1 font-mono text-[0.57rem] uppercase tracking-[0.2em] text-[#EBD8B0]">
+                Samen maken we de buurt
+            </p>
+        </div>
+
+        <p class="font-mono text-[0.57rem] uppercase tracking-[0.16em] text-[#AFC0D8]">
+            &copy; 2026 NGO Anderlecht
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
+

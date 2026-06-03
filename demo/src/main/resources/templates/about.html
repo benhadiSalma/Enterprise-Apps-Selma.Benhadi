@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Over ons - 1070 Agenda</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .font-display {
+            font-family: "Archivo Black", sans-serif;
+        }
+
+        .font-body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .font-mono {
+            font-family: "Space Mono", monospace;
+        }
+
+        .city-grid {
+            background-image:
+                    linear-gradient(rgba(30, 42, 68, 0.055) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30, 42, 68, 0.055) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#F7F1E8] text-[#1E2A44] font-body city-grid">
+
+<!-- NAVIGATIE -->
+<nav class="border-b-4 border-[#E3B341] bg-[#1E2A44] text-white shadow-lg">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+
+        <!-- LOGO EN LINK NAAR DE STARTPAGINA -->
+        <a th:href="@{/}"
+           class="flex items-center gap-3">
+
+            <span class="flex h-11 w-11 items-center justify-center bg-[#E3B341] font-display text-sm text-[#1E2A44]">
+                1070
+            </span>
+
+            <span>
+                <span class="block font-display text-lg uppercase tracking-wide">
+                    Anderlecht
+                </span>
+
+                <span class="block font-mono text-[0.58rem] uppercase tracking-[0.28em] text-[#EBD8B0]">
+                    Lokale agenda
+                </span>
+            </span>
+        </a>
+
+        <!-- MENU -->
+        <div class="flex flex-wrap items-center gap-5 font-mono text-[0.64rem] font-bold uppercase tracking-[0.15em]">
+
+            <a th:href="@{/}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Agenda
+            </a>
+
+            <a th:href="@{/new}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Nieuw evenement
+            </a>
+
+            <a th:href="@{/about}"
+               class="border-b-2 border-[#E3B341] pb-1 text-[#E3B341]">
+                Over ons
+            </a>
+
+            <a th:href="@{/contact}"
+               class="border-b-2 border-transparent pb-1 transition duration-300 hover:border-[#E3B341] hover:text-[#E3B341]">
+                Contact
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- INTRODUCTIESECTIE -->
+<header class="relative overflow-hidden bg-[#1E2A44] text-white">
+
+    <div class="absolute -right-12 -top-20 select-none font-display text-[13rem] leading-none text-white/[0.035] sm:right-4 sm:text-[19rem]">
+        1070
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-14 sm:px-7 sm:py-16">
+
+        <p class="mb-5 inline-flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-[#E3B341]">
+            <span class="h-2 w-2 bg-[#E3B341]"></span>
+            Samen voor de buurt
+        </p>
+
+        <h1 class="max-w-3xl font-display text-5xl uppercase leading-[0.98] tracking-tight sm:text-7xl">
+            Over onze
+            <span class="block text-[#E3B341]">
+                organisatie
+            </span>
+        </h1>
+
+        <p class="mt-7 max-w-xl text-base leading-7 text-[#D7DFEF]">
+            Een lokale NGO die mensen samenbrengt en ondersteuning biedt aan inwoners van Anderlecht.
+        </p>
+    </div>
+</header>
+
+<!-- HOOFDINHOUD -->
+<main class="mx-auto w-full max-w-6xl flex-grow px-5 py-14 sm:px-7 sm:py-16">
+
+    <div class="grid gap-7 lg:grid-cols-[1fr_310px]">
+
+        <!-- BESCHRIJVING VAN DE NGO -->
+        <section class="border-2 border-[#1E2A44] bg-[#FFFCF6] shadow-[7px_7px_0_#1E2A44]">
+
+            <div class="border-b-2 border-[#1E2A44] bg-[#E3B341] px-6 py-4">
+
+                <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#1E2A44]">
+                    Wie zijn wij?
+                </p>
+            </div>
+
+            <div class="space-y-6 px-6 py-7 sm:px-8 sm:py-9">
+
+                <h2 class="font-display text-3xl uppercase leading-tight text-[#1E2A44]">
+                    Samen bouwen we aan een sterke buurt.
+                </h2>
+
+                <p class="leading-7 text-[#63708A]">
+                    NGO Anderlecht zet zich in voor bewoners die nood hebben aan extra ondersteuning.
+                    Met lokale initiatieven en toegankelijke activiteiten willen we mensen samenbrengen
+                    en de verbondenheid binnen de buurt versterken.
+                </p>
+
+                <p class="leading-7 text-[#63708A]">
+                    We werken samen met vrijwilligers, buurtorganisaties en lokale partners.
+                    Zo creëren we kansen voor ontmoeting, solidariteit en ondersteuning op maat
+                    van de inwoners van Anderlecht.
+                </p>
+
+                <p class="leading-7 text-[#63708A]">
+                    Via deze website kunnen bezoekers eenvoudig ontdekken welke evenementen er plaatsvinden.
+                    Organisaties kunnen hun activiteiten delen, terwijl buurtbewoners snel de juiste informatie,
+                    locatie en contactgegevens terugvinden.
+                </p>
+            </div>
+        </section>
+
+
+
+        <!-- CONTACTGEGEVENS -->
+        <aside class="h-fit border-2 border-[#1E2A44] bg-[#1E2A44] text-white shadow-[7px_7px_0_#E3B341]">
+
+            <div class="border-b-2 border-[#E3B341] px-5 py-4">
+
+                <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-[#E3B341]">
+                    Contactgegevens
+                </p>
+            </div>
+
+            <div class="space-y-6 px-5 py-6">
+
+                <!-- ADRES -->
+                <div class="border-l-4 border-[#D5573B] pl-4">
+
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        Adres
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        Nijverheidskaai 170<br>
+                        1070 Anderlecht
+                    </p>
+                </div>
+
+                <!-- TELEFOONNUMMER -->
+                <div class="border-l-4 border-[#D5573B] pl-4">
+
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        Telefoon
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        +32 2 123 45 67
+                    </p>
+                </div>
+
+                <!-- E-MAILADRES -->
+                <div class="border-l-4 border-[#D5573B] pl-4">
+
+                    <p class="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-[#E3B341]">
+                        E-mailadres
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-[#D7DFEF]">
+                        info@ngo-anderlecht.be
+                    </p>
+                </div>
+
+                <!-- LINK NAAR DE CONTACTPAGINA -->
+                <a th:href="@{/contact}"
+                   class="inline-flex items-center gap-3 bg-[#D5573B] px-4 py-3 font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white shadow-[4px_4px_0_#E3B341] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#E3B341]">
+
+                    Contact opnemen
+
+                    <span>
+                        →
+                    </span>
+                </a>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- VOETTEKST -->
+<footer class="mt-10 border-t-4 border-[#E3B341] bg-[#1E2A44] px-5 py-7 text-center text-white">
+
+    <p class="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-[#AFC0D8]">
+        &copy; 2026 NGO Anderlecht. Alle rechten voorbehouden.
+    </p>
+</footer>
+
+</body>
+</html>
+
