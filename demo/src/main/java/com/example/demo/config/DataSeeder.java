@@ -16,20 +16,27 @@ public class DataSeeder {
     @Bean
     CommandLineRunner initDatabase(LocationRepository locationRepo, EventRepository eventRepo) {
         return args -> {
-            // We controleren of de database leeg is om dubbele data bij elke herstart te voorkomen
+            // Controleer of de database leeg is
             if (eventRepo.count() == 0) {
 
-                // 1. Locaties aanmaken
+                // --- 1. ALLE LOCATIES TOEVOEGEN ---
                 Location kaai = new Location("Campus Kaai", "Nijverheidskaai 170, 1070 Anderlecht", 200);
                 Location centrum = new Location("Buurtcentrum", "Kliniekstraat 15, 1070 Anderlecht", 50);
+                Location deRinck = new Location("Gemeenschapscentrum De Rinck", "Dapperheidsplein 7, 1070 Anderlecht", 150);
+                Location veeweide = new Location("Sportzaal Veeweide", "Veeweidestraat 80, 1070 Anderlecht", 300);
+
                 locationRepo.save(kaai);
                 locationRepo.save(centrum);
+                locationRepo.save(deRinck);
+                locationRepo.save(veeweide);
 
-                // 2. Unieke evenementen aanmaken
+                // --- 2. ALLE EVENEMENTEN TOEVOEGEN ---
+
+                // Evenementen uit script 1
                 Event event1 = new Event(
                         "Programmeerworkshop voor kinderen",
                         "Een speelse kennismaking met coderen en robotica voor de jeugd uit de wijk.",
-                        LocalDateTime.of(2026, 6, 15, 14, 0),
+                        LocalDateTime.now().plusDays(2),
                         "Logiscool",
                         "contact@logiscool.be",
                         kaai
@@ -38,7 +45,7 @@ public class DataSeeder {
                 Event event2 = new Event(
                         "Solidaire buurtmaaltijd",
                         "Verdeling van warme maaltijden voor kansarmen, in samenwerking met lokale handelaars.",
-                        LocalDateTime.of(2026, 6, 20, 18, 30),
+                        LocalDateTime.now().plusDays(4),
                         "Belchicken Anderlecht",
                         "solidariteit@belchicken.be",
                         centrum
@@ -47,15 +54,46 @@ public class DataSeeder {
                 Event event3 = new Event(
                         "Taaluitwisselingsavond",
                         "Oefen Frans, Nederlands en Engels bij een kopje koffie.",
-                        LocalDateTime.of(2026, 6, 25, 19, 0),
+                        LocalDateTime.now().plusDays(6),
                         "Eigen beheer",
                         "info@ngo-anderlecht.be",
                         kaai
                 );
 
+                // Evenementen uit script 2
+                Event event4 = new Event(
+                        "Buurtfeest in het park",
+                        "Een gezellige namiddag met muziek, kinderactiviteiten en hapjes voor bewoners uit de buurt.",
+                        LocalDateTime.now().plusDays(8),
+                        "NGO Anderlecht",
+                        "info@ngo-anderlecht.be",
+                        deRinck
+                );
+
+                Event event5 = new Event(
+                        "Inzameling van winterkleding",
+                        "Breng propere winterjassen, sjaals en dekens binnen voor mensen die extra ondersteuning nodig hebben.",
+                        LocalDateTime.now().plusDays(10),
+                        "Solidariteit 1070",
+                        "contact@solidariteit1070.be",
+                        deRinck
+                );
+
+                Event event6 = new Event(
+                        "Sportnamiddag voor jongeren",
+                        "Een gratis sportnamiddag met voetbal, basketbal en begeleide groepsactiviteiten.",
+                        LocalDateTime.now().plusDays(14),
+                        "Jeugdwerking Anderlecht",
+                        "jongeren@anderlecht.be",
+                        veeweide
+                );
+
                 eventRepo.save(event1);
                 eventRepo.save(event2);
                 eventRepo.save(event3);
+                eventRepo.save(event4);
+                eventRepo.save(event5);
+                eventRepo.save(event6);
             }
         };
     }
